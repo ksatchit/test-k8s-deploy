@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deploy
+  labels:
+    name: hello
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      name: hello
+  template:
+    metadata:
+      labels:
+        name: hello
+    spec:
+      containers:
+        - name: test-app
+          image: ksatchit/test-k8s-app:sha-85db82e
+          ports:
+            - containerPort: 8080
+ 
