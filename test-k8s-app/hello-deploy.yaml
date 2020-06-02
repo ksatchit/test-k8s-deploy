@@ -5,6 +5,7 @@ metadata:
   name: hello-deploy
   labels:
     name: hello
+    generated-by: auto-committer
 spec:
   replicas: 1
   selector:
@@ -17,7 +18,7 @@ spec:
     spec:
       containers:
         - name: test-app
-          image: ksatchit/test-k8s-app:sha-85db82e
+          image: ksatchit/test-k8s-app:sha-cb4aa61 
           ports:
             - containerPort: 8080
  
