@@ -22,7 +22,7 @@ jobs:
         run: |
           cd test-k8s-e2e
           ls -al
-          echo "placeholder-for-commit-signature" > commit.e2e
+          mktemp | cut -d "." -f 2 > commit.e2e
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
           git add .
