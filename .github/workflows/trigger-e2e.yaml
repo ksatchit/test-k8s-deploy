@@ -1,0 +1,33 @@
+---
+name: Trigger RaaS E2E Suite
+on:
+  push
+
+jobs:
+  update-baseline-trigger-e2e:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout e2e repo
+        uses: actions/checkout@v2
+        with:
+          repository: ksatchit/test-k8s-e2e
+          ref: master
+          path: test-k8s-e2e
+          token: ${{ secrets.AUTO_COMMIT_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 0
+      
+      - name: Update baseline artifact and trigger e2e
+        run: |
+          cd test-k8s-e2e
+          ls -al
+          echo "placeholder-for-commit-signature" > commit.e2e
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add .
+          git commit -s -m "Update baseline artifact and trigger e2e"
+          git push https://$USERNAME:$REPO_KEY@github.com/ksatchit/test-k8s-e2e.git master 
+        env:
+          REPO_KEY: ${{ secrets.AUTO_COMMIT_TOKEN }}
+          USERNAME: github-actions 
