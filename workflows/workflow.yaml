@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: greet-
+  name: greetflow
 spec:
   entrypoint: greet
   serviceAccountName: argo-chaos-default
